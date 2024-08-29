@@ -3,17 +3,14 @@ import { TIngredientsCategoryProps } from './type';
 import { TIngredient } from '@utils-types';
 import { IngredientsCategoryUI } from '../ui/ingredients-category';
 
+import { getConstructorItems } from '../../services/slices/BurgerConstructorSlice';
+import { useSelector } from '../../services/store'; // Хук для доступа к Redux
+
 export const IngredientsCategory = forwardRef<
   HTMLUListElement,
   TIngredientsCategoryProps
 >(({ title, titleRef, ingredients }, ref) => {
-  /** TODO: взять переменную из стора */
-  const burgerConstructor = {
-    bun: {
-      _id: ''
-    },
-    ingredients: []
-  };
+  const burgerConstructor = useSelector(getConstructorItems); // Получеаем текущие элементы конструктора из Redux
 
   const ingredientsCounters = useMemo(() => {
     const { bun, ingredients } = burgerConstructor;
